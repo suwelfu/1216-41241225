@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code API</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .qr-result {
+    margin-top: 20px;
+  }
+  .btn-container {
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+<div class="container text-center mt-5">
+  <h1>QR Code 生成</h1>
+  <p>請輸入要生成 QR Code 的文字或網址。</p>
+  
+  <!-- Input Field -->
+  <div class="mb-3">
+    <input type="text" id="inputText" class="form-control" placeholder="輸入文字或網址">
+  </div>
+  
+  <!-- Buttons -->
+  <div class="btn-container">
+    <button class="btn btn-success me-2" onclick="generateQRCode()">生成 QR Code</button>
+    <button class="btn btn-secondary" onclick="goBack()">返回上一頁</button>
+  </div>
+  
+  <!-- QR Code Display Area -->
+  <div id="qrCode" class="qr-result mt-3"></div>
+</div>
+
+<!-- QR Code JS Library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+function generateQRCode() {
+  const text = document.getElementById('inputText').value;
+  const qrCodeContainer = document.getElementById('qrCode');
+  qrCodeContainer.innerHTML = ''; // 清除之前的 QR Code
+  if (text) {
+    QRCode.toCanvas(document.createElement('canvas'), text, { width: 200 }, function (error, canvas) {
+      if (error) console.error(error);
+      qrCodeContainer.appendChild(canvas);
+    });
+  } else {
+    alert('請輸入文字或網址!');
+  }
+}
+
+function goBack() {
+  history.back(); // 返回上一頁
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

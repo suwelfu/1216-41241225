@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    background-color: #e0f7fa; /* 淺藍色背景 */
+}
+.navbar {
+    background-color: #eeff00; /* 淺綠色背景 */
+}
+.qr-result {
+    margin-top: 20px;
+}
+.welcome {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00796b;
+}
+img {
+            display: block; /* 設定圖片為區塊元素 */
+            margin: 0 auto; /* 左右邊距自動，達到水平置中 */
+        }
+</style>
+</head>
+<body>
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">API</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="stocks.html">股票資訊</a></li>
+                <li class="nav-item"><a class="nav-link" href="quality.html">空氣品質AQI</a></li>
+                <li class="nav-item"><a class="nav-link" href="qrcode-api.html">QRCode</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 歡迎語句 -->
+<div class="welcome">歡迎！^^</div>
+<div><img src="img/圖一.jpg"></div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- QR Code library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+function generateQRCode() {
+    const text = document.getElementById('inputText').value;
+    const qrCodeContainer = document.getElementById('qrCode');
+    qrCodeContainer.innerHTML = ""; // Clear previous QR code
+    if (text) {
+        QRCode.toCanvas(document.createElement('canvas'), text, { width: 150 }, function (error, canvas) {
+            if (error) console.error(error);
+            qrCodeContainer.appendChild(canvas);
+        });
+    } else {
+        alert('請輸入文字或網址!');
+    }
+}
+</script>
+</body>
+</html>
